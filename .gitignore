@@ -3,6 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Generated files ###
+calculate.jar
+
 ### IntelliJ IDEA ###
 .idea
 .idea/modules.xml
