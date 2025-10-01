@@ -6,16 +6,19 @@ else
 endif
 
 PROJECT_NAME = calculate
-JAR_FILE = target/$(PROJECT_NAME)-1.0-SNAPSHOT.jar
+TARGET_JAR = target/$(PROJECT_NAME)-1.0-SNAPSHOT.jar
+EXECUTABLE_JAR = $(PROJECT_NAME).jar
 
 # Default target
 .PHONY: all
-all: compile
+all: clean package
+	cp $(TARGET_JAR) $(EXECUTABLE_JAR)
 
 # Clean the project
 .PHONY: clean
 clean:
 	$(MAVEN_CMD) clean
+	rm -f $(EXECUTABLE_JAR)
 
 # Compile the project
 .PHONY: compile
@@ -32,16 +35,6 @@ test:
 package:
 	$(MAVEN_CMD) package
 
-# Install to local repository
-.PHONY: install
-install:
-	$(MAVEN_CMD) install
-
-# Run the application (adjust main class as needed)
-.PHONY: run
-run: package
-	java -jar $(JAR_FILE)
-
 # Verify the project
 .PHONY: verify
 verify:
@@ -51,4 +44,3 @@ verify:
 .PHONY: deps
 deps:
 	$(MAVEN_CMD) dependency:tree
-
