@@ -1,8 +1,8 @@
 # Detect OS and choose correct Maven Wrapper command
 ifeq ($(OS),Windows_NT)
-    MAVEN_CMD = mvnw.cmd
+    MAVEN_CMD = mvnw.cmd -s maven-settings.xml
 else
-    MAVEN_CMD = ./mvnw
+    MAVEN_CMD = ./mvnw -s maven-settings.xml
 endif
 
 PROJECT_NAME = calculate
@@ -44,3 +44,8 @@ verify:
 .PHONY: deps
 deps:
 	$(MAVEN_CMD) dependency:tree
+
+# Runs spotless plugin to format code correctly
+.PHONY: spotless
+spotless:
+	$(MAVEN_CMD) spotless:apply
