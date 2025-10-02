@@ -21,8 +21,5 @@ jobs:
           distribution: 'temurin'
           java-version: '25'
 
-      - name: Setup dependencies
-        run: sudo apt-get update && sudo apt-get install -y make
-
       - name: Run tests
         run: make test
