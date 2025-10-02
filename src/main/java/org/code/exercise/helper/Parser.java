@@ -11,10 +11,10 @@ public class Parser {
   }
 
   /**
-   * Tokenizes the input string into numbers and operators
+   * Tokenize the input string into numbers and operators
    *
    * @param expression arithmetic expression (ex: "2 + 3 * -1")
-   * @return a list of tokens in the infix order
+   * @return list of numbers and operators as tokens in the infix order
    */
   public static List<String> tokenize(String expression) {
     if (expression == null || expression.trim().isEmpty()) {
