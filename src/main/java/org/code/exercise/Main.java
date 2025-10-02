@@ -1,5 +1,7 @@
 package org.code.exercise;
 
+import org.code.exercise.service.Calculator;
+
 public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -7,6 +9,10 @@ public class Main {
             System.out.println("Example: java -jar calculate.jar \"3 * -2 + 6\"");
             return;
         }
-        //TODO: Implement the calculation logic
+
+        String expression = args[0].trim();
+        int result = Calculator.calculate(expression);
+
+        System.out.printf("Result: %d%n", result);
     }
 }
