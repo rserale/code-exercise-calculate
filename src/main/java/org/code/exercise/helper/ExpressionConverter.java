@@ -1,6 +1,7 @@
 package org.code.exercise.helper;
 
 import java.util.*;
+import org.code.exercise.exception.ExpressionConverterInvalidTokenException;
 
 public class ExpressionConverter {
 
@@ -30,7 +31,7 @@ public class ExpressionConverter {
         // if the token is an operator, we apply the rules of priority for it
         handleOperator(token, operatorStack, output);
       } else {
-        throw new IllegalArgumentException("Invalid token: " + token);
+        throw new ExpressionConverterInvalidTokenException("Invalid token: " + token);
       }
     }
 

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import java.util.List;
+import org.code.exercise.exception.EvaluatorStackException;
 import org.code.exercise.helper.Evaluator;
 import org.junit.Test;
 
@@ -54,30 +55,55 @@ public class EvaluatorTest {
   @Test
   public void testDivisionByZero() {
     List<String> postfix = List.of("5", "0", "/");
-    assertThrows(ArithmeticException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    ArithmeticException ex =
+        assertThrows(ArithmeticException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    assertEquals("Division by zero", ex.getMessage());
   }
 
   @Test
   public void testTooFewOperands() {
     List<String> postfix = List.of("5", "+");
-    assertThrows(IllegalArgumentException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    EvaluatorStackException ex =
+        assertThrows(
+            EvaluatorStackException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    assertEquals(
+        "Operation cannot be solved due to missing operands on the stack", ex.getMessage());
   }
 
   @Test
   public void testTooManyOperands() {
     List<String> postfix = List.of("2", "3", "4", "+");
-    assertThrows(IllegalArgumentException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
-  }
-
-  @Test
-  public void testTooManyOperators() {
-    List<String> postfix = List.of("5", "2", "+", "*");
-    assertThrows(IllegalArgumentException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    EvaluatorStackException ex =
+        assertThrows(
+            EvaluatorStackException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    assertEquals("More than one element left on the stack", ex.getMessage());
   }
 
   @Test
   public void testTooFewOperators() {
     List<String> postfix = List.of("5", "2", "3", "+");
-    assertThrows(IllegalArgumentException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    EvaluatorStackException ex =
+        assertThrows(
+            EvaluatorStackException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    assertEquals("More than one element left on the stack", ex.getMessage());
+  }
+
+  @Test
+  public void testTooManyOperators() {
+    List<String> postfix = List.of("5", "2", "+", "*");
+    EvaluatorStackException ex =
+        assertThrows(
+            EvaluatorStackException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    assertEquals(
+        "Operation cannot be solved due to missing operands on the stack", ex.getMessage());
+  }
+
+  @Test
+  public void testEmptyExpression() {
+    List<String> postfix = List.of();
+    EvaluatorStackException ex =
+        assertThrows(
+            EvaluatorStackException.class, () -> Evaluator.evaluatePostfixExpression(postfix));
+    assertEquals("Stack is empty", ex.getMessage());
   }
 }

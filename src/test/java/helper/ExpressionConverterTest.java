@@ -3,6 +3,7 @@ package helper;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import org.code.exercise.exception.ExpressionConverterInvalidTokenException;
 import org.code.exercise.helper.ExpressionConverter;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class ExpressionConverterTest {
   }
 
   @Test
-  public void testComplexOperation() {
+  public void testMultipleOperatorsExpression() {
     List<String> tokens = List.of("5", "+", "-3", "*", "2", "/", "4", "-", "1");
     List<String> postfix = ExpressionConverter.infixToPostfix(tokens);
     assertEquals(List.of("5", "-3", "2", "*", "4", "/", "+", "1", "-"), postfix);
@@ -46,7 +47,11 @@ public class ExpressionConverterTest {
   @Test
   public void testInvalidToken() {
     List<String> infix = List.of("2", "+", "a");
-    assertThrows(IllegalArgumentException.class, () -> ExpressionConverter.infixToPostfix(infix));
+    ExpressionConverterInvalidTokenException ex =
+        assertThrows(
+            ExpressionConverterInvalidTokenException.class,
+            () -> ExpressionConverter.infixToPostfix(infix));
+    assertEquals("Invalid token: a", ex.getMessage());
   }
 
   @Test
