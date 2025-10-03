@@ -4,59 +4,50 @@ import java.util.*;
 
 public class Evaluator {
 
-  private static final Map<String, Integer> OPERATORS_PRIORITIES =
-          Map.of(
-                  "+", 1,
-                  "-", 1,
-                  "*", 2,
-                  "/", 2);
-
   private Evaluator() {
     throw new UnsupportedOperationException("Utility class");
   }
 
-  public static int evaluatePostfix(List<String> tokens) {
+  /**
+   * Evaluates a postfix (Reverse Polish Notation) arithmetic expression
+   *
+   * @param tokens list of numbers and operators in postfix order
+   * @return the result of evaluating the expression
+   * @throws IllegalArgumentException if the expression is invalid
+   */
+  public static int evaluatePostfixExpression(List<String> tokens) {
     Deque<Integer> stack = new ArrayDeque<>();
 
+    // now that the expression is converted to postfix notation, we can simply evaluate it from left
+    // to right
     for (String token : tokens) {
-      if (isInteger(token)) {
+      if (TokenUtilities.isInteger(token)) {
+        // if the token is a number, we push it on the stack
         stack.push(Integer.parseInt(token));
-      } else if (isOperator(token)) {
-        if (stack.size() < 2) {
-          throw new IllegalArgumentException("Invalid expression");
-        }
-        int b = stack.pop();
-        int a = stack.pop();
-        int result = applyOperator(a, b, token);
-        stack.push(result);
+      } else if (TokenUtilities.isOperator(token)) {
+        // if this is an operator, we're going to apply it to the two last numbers on the stack
+        solveOperation(token, stack);
       }
     }
 
+    // After processing all the tokens, there should be exactly one element left: the final result
     if (stack.size() != 1) {
-      throw new IllegalArgumentException("Invalid expression evaluation");
+      throw new IllegalArgumentException(
+          "Error evaluating expression: more than one element left on the stack");
     }
 
     return stack.pop();
   }
 
-  private static int applyOperator(int a, int b, String op) {
-    return switch (op) {
-      case "+" -> a + b;
-      case "-" -> a - b;
-      case "*" -> a * b;
-      case "/" -> {
-        if (b == 0) throw new ArithmeticException("Division by zero");
-        yield a / b;
-      }
-      default -> throw new IllegalArgumentException("Unknown operator: " + op);
-    };
-  }
-
-  private static boolean isOperator(String token) {
-    return OPERATORS_PRIORITIES.containsKey(token);
-  }
-
-  private static boolean isInteger(String token) {
-    return token.matches("-?\\d+");
+  private static void solveOperation(String operator, Deque<Integer> stack) {
+    // we need two numbers in the stack for solving the operation
+    if (stack.size() < 2) {
+      throw new IllegalArgumentException("Operation cannot be solved due to missing operands");
+    }
+    int b = stack.pop();
+    int a = stack.pop();
+    // we apply the operator to the two numbers and push the result back on the stack
+    int result = TokenUtilities.applyOperator(a, b, operator);
+    stack.push(result);
   }
 }

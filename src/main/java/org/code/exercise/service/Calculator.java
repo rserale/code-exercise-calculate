@@ -1,6 +1,7 @@
 package org.code.exercise.service;
 
 import java.util.List;
+import org.code.exercise.helper.Evaluator;
 import org.code.exercise.helper.ExpressionConverter;
 import org.code.exercise.helper.Parser;
 
@@ -24,7 +25,6 @@ public class Calculator {
 
     List<String> infixTokens = Parser.tokenize(expression);
     List<String> postfixTokens = ExpressionConverter.infixToPostfix(infixTokens);
-    // TODO
-    return 0; // temporary value
+    return Evaluator.evaluatePostfixExpression(postfixTokens);
   }
 }
