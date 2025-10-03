@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.13.2</junit.version>
         <maven.jar.plugin.version>3.4.2</maven.jar.plugin.version>
-        <spotless.plugin.version>2.43.0</spotless.plugin.version>
+        <spotless.plugin.version>3.0.0</spotless.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -42,7 +42,7 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.43.0</version>
+                <version>${spotless.plugin.version}</version>
                 <configuration>
                     <java>
                         <googleJavaFormat/>
