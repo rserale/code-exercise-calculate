@@ -35,6 +35,14 @@ public class TokenUtilities {
     return OPERATORS_PRIORITIES.get(operator);
   }
 
+  public static boolean isLeftParenthesis(String token) {
+    return "(".equals(token);
+  }
+
+  public static boolean isRightParenthesis(String token) {
+    return ")".equals(token);
+  }
+
   public static boolean isInteger(String token) {
     return token.matches("-?\\d+");
   }
