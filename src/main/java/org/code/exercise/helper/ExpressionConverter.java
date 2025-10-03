@@ -25,12 +25,17 @@ public class ExpressionConverter {
 
     for (String token : tokens) {
       if (TokenUtilities.isInteger(token)) {
+        // if the token is a number, we immediately add it to the output
         output.add(token);
       } else if (TokenUtilities.isOperator(token)) {
+        // if the token is an operator, we apply the rules of priority for it
         handleOperator(token, operatorStack, output);
       } else if (TokenUtilities.isLeftParenthesis(token)) {
+        // if the token is a left parenthesis, we push it on the operator stack
         operatorStack.push(token);
       } else if (TokenUtilities.isRightParenthesis(token)) {
+        // if the token is a right parenthesis, we fetch in the operator stack all the operators
+        // pushed since the left one was pushed
         handleRightPArenthesis(operatorStack, output);
       } else {
         throw new ExpressionConverterInvalidTokenException("Invalid token: " + token);
@@ -50,9 +55,13 @@ public class ExpressionConverter {
   }
 
   private static void handleRightPArenthesis(Deque<String> operatorStack, List<String> output) {
+    // we pop and append to output all the operators present in the stack until we reach the left
+    // parenthesis in the stack
     while (!operatorStack.isEmpty() && !TokenUtilities.isLeftParenthesis(operatorStack.peek())) {
       output.add(operatorStack.pop());
     }
+    // if we reach the end of the stack, it means that a left parenthesis was missing in the
+    // original expression
     if (operatorStack.isEmpty()) {
       throw new ExpressionConverterInvalidTokenException("Mismatched parentheses");
     }
