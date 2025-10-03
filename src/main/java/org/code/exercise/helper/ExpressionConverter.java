@@ -25,11 +25,13 @@ public class ExpressionConverter {
 
     for (String token : tokens) {
       if (TokenUtilities.isInteger(token)) {
-        // if the token is a number, we immediately add it to the output
         output.add(token);
       } else if (TokenUtilities.isOperator(token)) {
-        // if the token is an operator, we apply the rules of priority for it
         handleOperator(token, operatorStack, output);
+      } else if (TokenUtilities.isLeftParenthesis(token)) {
+        operatorStack.push(token);
+      } else if (TokenUtilities.isRightParenthesis(token)) {
+        handleRightPArenthesis(operatorStack, output);
       } else {
         throw new ExpressionConverterInvalidTokenException("Invalid token: " + token);
       }
@@ -37,10 +39,24 @@ public class ExpressionConverter {
 
     // finally, we pop any operators left in the stack and append them to the output
     while (!operatorStack.isEmpty()) {
-      output.add(operatorStack.pop());
+      String elem = operatorStack.pop();
+      if (TokenUtilities.isLeftParenthesis(elem) || TokenUtilities.isRightParenthesis(elem)) {
+        throw new ExpressionConverterInvalidTokenException("Mismatched parentheses");
+      }
+      output.add(elem);
     }
 
     return output;
+  }
+
+  private static void handleRightPArenthesis(Deque<String> operatorStack, List<String> output) {
+    while (!operatorStack.isEmpty() && !TokenUtilities.isLeftParenthesis(operatorStack.peek())) {
+      output.add(operatorStack.pop());
+    }
+    if (operatorStack.isEmpty()) {
+      throw new ExpressionConverterInvalidTokenException("Mismatched parentheses");
+    }
+    operatorStack.pop();
   }
 
   private static void handleOperator(
@@ -48,6 +64,7 @@ public class ExpressionConverter {
     // we pop operators from the stack while they have higher or equal priority than our current one
     // those operators are appended to the output in the unstacking order
     while (!operatorStack.isEmpty()
+        && TokenUtilities.isOperator(operatorStack.peek())
         && TokenUtilities.getOperatorPriority(operator)
             <= TokenUtilities.getOperatorPriority(operatorStack.peekFirst())) {
       output.add(operatorStack.pop());

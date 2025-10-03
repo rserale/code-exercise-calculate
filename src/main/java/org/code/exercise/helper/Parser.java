@@ -20,7 +20,13 @@ public class Parser {
     if (expression == null || expression.trim().isEmpty()) {
       return Collections.emptyList();
     }
-    String[] parts = expression.trim().split("\\s+");
+
+    // we add spaces around parenthesis to make them separate tokens
+    String expressionWithSpacedParenthesis = expression.replace("(", " ( ").replace(")", " ) ");
+
+    // we split the expression with any character matching the regexp '\s', which in this case means
+    // any blank character (space, tab, etc)
+    String[] parts = expressionWithSpacedParenthesis.trim().split("\\s+");
     return Arrays.asList(parts);
   }
 }

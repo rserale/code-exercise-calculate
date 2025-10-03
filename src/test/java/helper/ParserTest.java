@@ -50,4 +50,17 @@ public class ParserTest {
     List<String> tokens = Parser.tokenize(expr);
     assertEquals(List.of("42"), tokens);
   }
+
+  @Test
+  public void testParenthesis() {
+    List<String> expectedResult = List.of("(", "2", "+", "1", ")", "*", "3");
+
+    String expr1 = "(2 + 1) * 3";
+    List<String> tokens1 = Parser.tokenize(expr1);
+    assertEquals(expectedResult, tokens1);
+
+    String expr2 = "( 2 + 1 ) * 3";
+    List<String> tokens = Parser.tokenize(expr2);
+    assertEquals(expectedResult, tokens);
+  }
 }
