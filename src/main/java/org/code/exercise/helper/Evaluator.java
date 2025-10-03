@@ -44,8 +44,8 @@ public class Evaluator {
     if (stack.size() < 2) {
       throw new IllegalArgumentException("Operation cannot be solved due to missing operands");
     }
-    int a = stack.pop();
     int b = stack.pop();
+    int a = stack.pop();
     // we apply the operator to the two numbers and push the result back on the stack
     int result = TokenUtilities.applyOperator(a, b, operator);
     stack.push(result);
