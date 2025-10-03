@@ -1,4 +1,4 @@
-name: CI - Spotless & Tests
+name: Spotless & tests
 
 on:
   pull_request:
@@ -33,7 +33,7 @@ jobs:
         run: mvn --batch-mode install -DskipTests
 
       - name: Spotless Check
-        run: make spotless
+        run: make spotless-check
 
       - name: Run Tests
         run: make test
