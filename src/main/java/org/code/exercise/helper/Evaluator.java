@@ -14,7 +14,7 @@ public class Evaluator {
    *
    * @param tokens list of numbers and operators in postfix order
    * @return the result of evaluating the expression
-   * @throws IllegalArgumentException if the expression is invalid
+   * @throws EvaluatorStackException in case of wrong state of operator stack
    */
   public static int evaluatePostfixExpression(List<String> tokens) {
     Deque<Integer> stack = new ArrayDeque<>();

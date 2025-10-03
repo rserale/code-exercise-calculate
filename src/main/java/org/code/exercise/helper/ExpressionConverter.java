@@ -17,7 +17,8 @@ public class ExpressionConverter {
    *
    * @param tokens list of numbers and operators in infix order
    * @return list of numbers and operators in postfix order
-   * @throws IllegalArgumentException if an invalid token is encountered
+   * @throws ExpressionConverterInvalidTokenException in case of syntax error or mismatched
+   *     parentheses
    */
   public static List<String> infixToPostfix(List<String> tokens) {
     List<String> output = new ArrayList<>();
