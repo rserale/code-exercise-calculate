@@ -55,9 +55,8 @@ public class CalculatorITTest {
 
   @Test
   public void testEmptyExpression() {
-    ExpressionConverterInvalidTokenException ex =
-        assertThrows(
-            ExpressionConverterInvalidTokenException.class, () -> Calculator.calculate(""));
+    IllegalArgumentException ex =
+        assertThrows(IllegalArgumentException.class, () -> Calculator.calculate(""));
     assertEquals("Expression must not be null or empty", ex.getMessage());
   }
 
