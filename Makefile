@@ -46,6 +46,11 @@ deps:
 	$(MAVEN_CMD) dependency:tree
 
 # Runs spotless plugin to format code correctly
-.PHONY: spotless
-spotless:
+.PHONY: spotless-apply
+spotless-apply:
 	$(MAVEN_CMD) spotless:apply
+
+# Runs spotless plugin to check code format
+.PHONY: spotless-check
+spotless-check:
+	$(MAVEN_CMD) spotless:check
