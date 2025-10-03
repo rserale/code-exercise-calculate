@@ -1,6 +1,7 @@
 package org.code.exercise.helper;
 
 import java.util.*;
+import org.code.exercise.exception.EvaluatorStackException;
 
 public class Evaluator {
 
@@ -31,9 +32,10 @@ public class Evaluator {
     }
 
     // After processing all the tokens, there should be exactly one element left: the final result
-    if (stack.size() != 1) {
-      throw new IllegalArgumentException(
-          "Error evaluating expression: more than one element left on the stack");
+    if (stack.size() > 1) {
+      throw new EvaluatorStackException("More than one element left on the stack");
+    } else if (stack.size() == 0) {
+      throw new EvaluatorStackException("Stack is empty");
     }
 
     return stack.pop();
@@ -42,7 +44,8 @@ public class Evaluator {
   private static void solveOperation(String operator, Deque<Integer> stack) {
     // we need two numbers in the stack for solving the operation
     if (stack.size() < 2) {
-      throw new IllegalArgumentException("Operation cannot be solved due to missing operands");
+      throw new EvaluatorStackException(
+          "Operation cannot be solved due to missing operands on the stack");
     }
     int b = stack.pop();
     int a = stack.pop();
