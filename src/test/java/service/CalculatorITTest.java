@@ -64,26 +64,26 @@ public class CalculatorITTest {
    * Bonus features
    * */
   @Test
-  public void testParenthesis() {
+  public void testParentheses() {
     assertEquals(120, Calculator.calculate("( 8 + 2 ) * 12"));
     assertEquals(120, Calculator.calculate("(8 + 2) * 12"));
     assertEquals(15, Calculator.calculate("((8 + 2) / 2) * 3"));
   }
 
   @Test
-  public void testMismatchedParenthesis() {
+  public void testMismatchedParentheses() {
     ExpressionConverterInvalidTokenException ex1 =
         assertThrows(
             ExpressionConverterInvalidTokenException.class, () -> Calculator.calculate("(6 / 3"));
-    assertEquals("Mismatched parentheses", ex1.getMessage());
+    assertEquals("Mismatched parentheses: right parenthesis missing", ex1.getMessage());
     ExpressionConverterInvalidTokenException ex2 =
         assertThrows(
             ExpressionConverterInvalidTokenException.class, () -> Calculator.calculate("6 / 3)"));
-    assertEquals("Mismatched parentheses", ex2.getMessage());
+    assertEquals("Mismatched parentheses: left parenthesis missing", ex2.getMessage());
     ExpressionConverterInvalidTokenException ex3 =
         assertThrows(
             ExpressionConverterInvalidTokenException.class,
             () -> Calculator.calculate("((6 + 2 * 3)"));
-    assertEquals("Mismatched parentheses", ex3.getMessage());
+    assertEquals("Mismatched parentheses: right parenthesis missing", ex3.getMessage());
   }
 }

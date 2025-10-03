@@ -45,8 +45,11 @@ public class ExpressionConverter {
     // finally, we pop any operators left in the stack and append them to the output
     while (!operatorStack.isEmpty()) {
       String elem = operatorStack.pop();
-      if (TokenUtilities.isLeftParenthesis(elem) || TokenUtilities.isRightParenthesis(elem)) {
-        throw new ExpressionConverterInvalidTokenException("Mismatched parentheses");
+      // at this step, if we find a left parenthesis in the stack, it means that there was no right
+      // one, which means it never got popped from the stack
+      if (TokenUtilities.isLeftParenthesis(elem)) {
+        throw new ExpressionConverterInvalidTokenException(
+            "Mismatched parentheses: right parenthesis missing");
       }
       output.add(elem);
     }
@@ -63,8 +66,10 @@ public class ExpressionConverter {
     // if we reach the end of the stack, it means that a left parenthesis was missing in the
     // original expression
     if (operatorStack.isEmpty()) {
-      throw new ExpressionConverterInvalidTokenException("Mismatched parentheses");
+      throw new ExpressionConverterInvalidTokenException(
+          "Mismatched parentheses: left parenthesis missing");
     }
+    // finally, we get rid of the left parenthesis once we reach it
     operatorStack.pop();
   }
 
