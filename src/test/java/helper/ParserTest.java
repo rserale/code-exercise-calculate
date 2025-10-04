@@ -51,6 +51,8 @@ public class ParserTest {
     assertEquals(List.of("42"), tokens);
   }
 
+  // Bonus feature: parentheses
+
   @Test
   public void testParenthesis() {
     List<String> expectedResult = List.of("(", "2", "+", "1", ")", "*", "3");

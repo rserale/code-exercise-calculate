@@ -61,9 +61,8 @@ public class ExpressionConverterTest {
     assertTrue(postfix.isEmpty());
   }
 
-  /*
-   * Bonus features
-   * */
+  // Bonus feature: parentheses
+
   @Test
   public void testParentheses() {
     List<String> infix1 =

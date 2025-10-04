@@ -12,11 +12,6 @@ package org.code.exercise.exception;
  * </ul>
  */
 public class EvaluatorStackException extends RuntimeException {
-
-  public EvaluatorStackException() {
-    super();
-  }
-
   public EvaluatorStackException(String message) {
     super(message);
   }

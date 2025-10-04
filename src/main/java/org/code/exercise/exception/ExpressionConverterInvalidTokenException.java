@@ -10,11 +10,6 @@ package org.code.exercise.exception;
  * </ul>
  */
 public class ExpressionConverterInvalidTokenException extends IllegalArgumentException {
-
-  public ExpressionConverterInvalidTokenException() {
-    super();
-  }
-
   public ExpressionConverterInvalidTokenException(String message) {
     super(message);
   }

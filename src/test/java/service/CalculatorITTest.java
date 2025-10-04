@@ -60,9 +60,8 @@ public class CalculatorITTest {
     assertEquals("Expression must not be null or empty", ex.getMessage());
   }
 
-  /*
-   * Bonus features
-   * */
+  // Bonus feature: parentheses
+
   @Test
   public void testParentheses() {
     assertEquals(120, Calculator.calculate("( 8 + 2 ) * 12"));
