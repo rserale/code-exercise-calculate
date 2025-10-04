@@ -62,6 +62,7 @@ public class ExpressionConverter {
   }
 
   private static void handleRightParenthesis(Deque<String> operatorStack, List<String> output) {
+    // TODO: maybe use getTokenType here instead of isoperator ?
     // we pop and append to output all the operators present in the stack until we reach the left
     // parenthesis in the stack
     while (!operatorStack.isEmpty()

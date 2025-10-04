@@ -34,7 +34,7 @@ public class Evaluator {
         throw new EvaluatorStackException("Invalid token in postfix expression: " + token);
       }
     }
-    // we alidate the final stack state
+    // we validate the final stack state
     validateStackAfterEvaluation(stack);
     return stack.pop();
   }
