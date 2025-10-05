@@ -7,7 +7,7 @@ import org.code.exercise.service.exception.ExpressionConverterInvalidTokenExcept
 public class Main {
 
   public static void main(String[] args) {
-    if (args.length != 0) {
+    if (args.length != 1) {
       printUsage();
       return;
     }
