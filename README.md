@@ -1,6 +1,7 @@
 # Calculate
 
 A Java command-line calculator that evaluates base arithmetic expressions for integers.
+
 It uses the [`Shunting-yard algorithm`](https://en.wikipedia.org/wiki/Shunting_yard_algorithm) to convert an infix expression into postfix notation (also called [`Reverse Polish Notation`](https://en.wikipedia.org/wiki/Reverse_Polish_notation)) in order to handle the priorities of the operators in an easy way during the evaluation.
 
 ## Features
@@ -78,6 +79,14 @@ make spotless-check
 # format code using Spotless plugin
 make spotless-apply
 ```
+
+### Continuous Integration
+
+This project includes a GitHub workflow that automatically runs tests on pull requests targeting the main branch.
+
+This ensures that any changes submitted via PR are automatically validated before merging.
+
+The workflow configuration can be found [here](.github/workflows/run-tests.yml).
 
 ### Notes
 
