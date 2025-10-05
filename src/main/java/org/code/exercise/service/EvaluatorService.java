@@ -37,7 +37,7 @@ public class EvaluatorService {
   }
 
   /*
-   * We apply the operator to the last two numbers on the stack, and push the result.
+   * We apply the operator to the last two numbers on the stack (the one on top of the stack being the last operand), and push the result.
    * */
   private static void applyOperatorToStack(String operator, Deque<Integer> stack) {
     if (stack.size() < 2) {
