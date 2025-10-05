@@ -1,6 +1,6 @@
 package org.code.exercise;
 
-import org.code.exercise.service.Calculator;
+import org.code.exercise.service.CalculatorService;
 
 public class Main {
   public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class Main {
     }
 
     String expression = args[0].trim();
-    int result = Calculator.calculate(expression);
+    int result = CalculatorService.calculate(expression);
 
     System.out.printf("Result: %d%n", result);
   }

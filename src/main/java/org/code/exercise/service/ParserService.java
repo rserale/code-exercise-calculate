@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import org.code.exercise.service.helper.CalculatorUtilities;
 
-public class Parser {
+public class ParserService {
 
   private static String DELIMITER_REGEXP = "\\s+";
 
-  private Parser() {
+  private ParserService() {
     throw new UnsupportedOperationException("Utility class");
   }
 

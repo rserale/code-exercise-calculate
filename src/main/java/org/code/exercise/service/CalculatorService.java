@@ -3,9 +3,9 @@ package org.code.exercise.service;
 import java.util.List;
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 
-public class Calculator {
+public class CalculatorService {
 
-  private Calculator() {
+  private CalculatorService() {
     throw new UnsupportedOperationException("Utility class");
   }
 
@@ -24,8 +24,8 @@ public class Calculator {
       throw new IllegalArgumentException("Expression must not be null or empty");
     }
 
-    List<String> infixTokens = Parser.tokenize(expression);
-    List<String> postfixTokens = ExpressionConverter.infixToPostfix(infixTokens);
-    return Evaluator.evaluatePostfixExpression(postfixTokens);
+    List<String> infixTokens = ParserService.tokenize(expression);
+    List<String> postfixTokens = ExpressionConverterService.infixToPostfix(infixTokens);
+    return EvaluatorService.evaluatePostfixExpression(postfixTokens);
   }
 }

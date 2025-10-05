@@ -1,46 +1,46 @@
-package helper;
+package service.helper;
 
 import static org.junit.Assert.*;
 
 import java.util.List;
-import org.code.exercise.service.ExpressionConverter;
+import org.code.exercise.service.ExpressionConverterService;
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 import org.junit.Test;
 
-public class ExpressionConverterTest {
+public class ExpressionConverterServiceTest {
 
   @Test
   public void testAddition() {
     List<String> infix = List.of("2", "+", "3");
-    List<String> postfix = ExpressionConverter.infixToPostfix(infix);
+    List<String> postfix = ExpressionConverterService.infixToPostfix(infix);
     assertEquals(List.of("2", "3", "+"), postfix);
   }
 
   @Test
   public void testAdditionDivision() {
     List<String> infix = List.of("8", "+", "4", "/", "2");
-    List<String> postfix = ExpressionConverter.infixToPostfix(infix);
+    List<String> postfix = ExpressionConverterService.infixToPostfix(infix);
     assertEquals(List.of("8", "4", "2", "/", "+"), postfix);
   }
 
   @Test
   public void testSubstractionMultiplication() {
     List<String> infix = List.of("7", "-", "3", "*", "2");
-    List<String> postfix = ExpressionConverter.infixToPostfix(infix);
+    List<String> postfix = ExpressionConverterService.infixToPostfix(infix);
     assertEquals(List.of("7", "3", "2", "*", "-"), postfix);
   }
 
   @Test
   public void testNegativeNumbers() {
     List<String> infix = List.of("3", "*", "-2", "+", "6");
-    List<String> postfix = ExpressionConverter.infixToPostfix(infix);
+    List<String> postfix = ExpressionConverterService.infixToPostfix(infix);
     assertEquals(List.of("3", "-2", "*", "6", "+"), postfix);
   }
 
   @Test
   public void testMultipleOperatorsExpression() {
     List<String> infix = List.of("5", "+", "-3", "*", "2", "/", "4", "-", "1");
-    List<String> postfix = ExpressionConverter.infixToPostfix(infix);
+    List<String> postfix = ExpressionConverterService.infixToPostfix(infix);
     assertEquals(List.of("5", "-3", "2", "*", "4", "/", "+", "1", "-"), postfix);
   }
 
@@ -50,14 +50,14 @@ public class ExpressionConverterTest {
     ExpressionConverterInvalidTokenException ex =
         assertThrows(
             ExpressionConverterInvalidTokenException.class,
-            () -> ExpressionConverter.infixToPostfix(infix));
+            () -> ExpressionConverterService.infixToPostfix(infix));
     assertEquals("Invalid token: a", ex.getMessage());
   }
 
   @Test
   public void testEmptyInputReturnsEmptyList() {
     List<String> infix = List.of();
-    List<String> postfix = ExpressionConverter.infixToPostfix(infix);
+    List<String> postfix = ExpressionConverterService.infixToPostfix(infix);
     assertTrue(postfix.isEmpty());
   }
 
@@ -66,11 +66,11 @@ public class ExpressionConverterTest {
   @Test
   public void testParentheses() {
     List<String> infix1 =
-        ExpressionConverter.infixToPostfix(List.of("(", "8", "+", "2", ")", "*", "12"));
+        ExpressionConverterService.infixToPostfix(List.of("(", "8", "+", "2", ")", "*", "12"));
     assertEquals(List.of("8", "2", "+", "12", "*"), infix1);
 
     List<String> infix2 =
-        ExpressionConverter.infixToPostfix(
+        ExpressionConverterService.infixToPostfix(
             List.of("(", "(", "8", "+", "2", ")", "/", "2", ")", "*", "3"));
     assertEquals(List.of("8", "2", "+", "2", "/", "3", "*"), infix2);
   }
@@ -81,21 +81,21 @@ public class ExpressionConverterTest {
     ExpressionConverterInvalidTokenException ex1 =
         assertThrows(
             ExpressionConverterInvalidTokenException.class,
-            () -> ExpressionConverter.infixToPostfix(infix1));
+            () -> ExpressionConverterService.infixToPostfix(infix1));
     assertEquals("Mismatched parentheses: right parenthesis missing", ex1.getMessage());
 
     List<String> infix2 = List.of("6", "/", "3", ")");
     ExpressionConverterInvalidTokenException ex2 =
         assertThrows(
             ExpressionConverterInvalidTokenException.class,
-            () -> ExpressionConverter.infixToPostfix(infix2));
+            () -> ExpressionConverterService.infixToPostfix(infix2));
     assertEquals("Mismatched parentheses: left parenthesis missing", ex2.getMessage());
 
     List<String> infix3 = List.of("(", "(", "6", "+", "2", "*", "3", ")");
     ExpressionConverterInvalidTokenException ex3 =
         assertThrows(
             ExpressionConverterInvalidTokenException.class,
-            () -> ExpressionConverter.infixToPostfix(infix3));
+            () -> ExpressionConverterService.infixToPostfix(infix3));
     assertEquals("Mismatched parentheses: right parenthesis missing", ex3.getMessage());
   }
 }

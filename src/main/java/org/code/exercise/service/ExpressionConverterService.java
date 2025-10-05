@@ -5,9 +5,9 @@ import org.code.exercise.service.exception.ExpressionConverterInvalidTokenExcept
 import org.code.exercise.service.helper.CalculatorUtilities;
 import org.code.exercise.service.helper.enums.TokenType;
 
-public class ExpressionConverter {
+public class ExpressionConverterService {
 
-  private ExpressionConverter() {
+  private ExpressionConverterService() {
     throw new UnsupportedOperationException("Utility class");
   }
 

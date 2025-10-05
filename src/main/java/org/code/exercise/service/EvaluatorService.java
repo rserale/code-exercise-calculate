@@ -5,9 +5,9 @@ import org.code.exercise.service.exception.EvaluatorStackException;
 import org.code.exercise.service.helper.CalculatorUtilities;
 import org.code.exercise.service.helper.enums.TokenType;
 
-public class Evaluator {
+public class EvaluatorService {
 
-  private Evaluator() {
+  private EvaluatorService() {
     throw new UnsupportedOperationException("Utility class");
   }
 
