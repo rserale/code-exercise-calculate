@@ -1,4 +1,6 @@
-package org.code.exercise.helper;
+package org.code.exercise.service;
+
+import org.code.exercise.service.helper.CalculatorUtilities;
 
 import java.util.Arrays;
 import java.util.Collections;

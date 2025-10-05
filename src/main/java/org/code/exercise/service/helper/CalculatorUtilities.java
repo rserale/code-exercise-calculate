@@ -1,11 +1,13 @@
-package org.code.exercise.helper;
+package org.code.exercise.service.helper;
+
+import org.code.exercise.service.helper.enums.TokenType;
 
 import java.util.Map;
 import java.util.function.IntBinaryOperator;
 
 public class CalculatorUtilities {
-  static final String LEFT_PARENTHESIS = "(";
-  static final String RIGHT_PARENTHESIS = ")";
+  public static final String LEFT_PARENTHESIS = "(";
+  public static final String RIGHT_PARENTHESIS = ")";
 
   private record Operator(int priority, IntBinaryOperator operation) {}
 
@@ -24,6 +26,14 @@ public class CalculatorUtilities {
 
   private CalculatorUtilities() {
     throw new UnsupportedOperationException("Utility class");
+  }
+
+  public static TokenType getTokenType(String token) {
+    if (isInteger(token)) return TokenType.NUMBER;
+    if (isOperator(token)) return TokenType.OPERATOR;
+    if (isLeftParenthesis(token)) return TokenType.LEFT_PAREN;
+    if (isRightParenthesis(token)) return TokenType.RIGHT_PAREN;
+    return TokenType.INVALID;
   }
 
   public static boolean isOperator(String token) {

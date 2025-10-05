@@ -1,4 +1,4 @@
-package org.code.exercise.exception;
+package org.code.exercise.service.exception;
 
 /**
  * Thrown when converting an infix expression to postfix fails.

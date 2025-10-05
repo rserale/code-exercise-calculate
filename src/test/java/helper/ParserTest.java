@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
 import java.util.List;
-import org.code.exercise.helper.Parser;
+import org.code.exercise.service.Parser;
 import org.junit.Test;
 
 public class ParserTest {

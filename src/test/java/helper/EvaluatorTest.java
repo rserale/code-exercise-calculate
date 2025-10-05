@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import java.util.List;
-import org.code.exercise.exception.EvaluatorStackException;
-import org.code.exercise.helper.Evaluator;
+import org.code.exercise.service.exception.EvaluatorStackException;
+import org.code.exercise.service.Evaluator;
 import org.junit.Test;
 
 public class EvaluatorTest {

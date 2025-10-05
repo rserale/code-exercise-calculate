@@ -1,10 +1,7 @@
 package org.code.exercise.service;
 
 import java.util.List;
-import org.code.exercise.exception.ExpressionConverterInvalidTokenException;
-import org.code.exercise.helper.Evaluator;
-import org.code.exercise.helper.ExpressionConverter;
-import org.code.exercise.helper.Parser;
+import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 
 public class Calculator {
 

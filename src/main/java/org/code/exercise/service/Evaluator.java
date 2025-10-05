@@ -1,7 +1,9 @@
-package org.code.exercise.helper;
+package org.code.exercise.service;
 
 import java.util.*;
-import org.code.exercise.exception.EvaluatorStackException;
+import org.code.exercise.service.exception.EvaluatorStackException;
+import org.code.exercise.service.helper.CalculatorUtilities;
+import org.code.exercise.service.helper.enums.TokenType;
 
 public class Evaluator {
 
@@ -17,16 +19,15 @@ public class Evaluator {
    * @throws EvaluatorStackException in case of wrong state of operator stack
    */
   public static int evaluatePostfixExpression(List<String> tokens) {
-    //TODO: maybe use tokenType logic from ExpressionConverter ?
     Deque<Integer> stack = new ArrayDeque<>();
 
     // now that the expression is converted to postfix notation, we can simply evaluate it from left
     // to right
     for (String token : tokens) {
-      if (CalculatorUtilities.isInteger(token)) {
+      if (CalculatorUtilities.getTokenType(token) == TokenType.NUMBER) {
         // if the token is a number, we push it on the stack
         stack.push(Integer.parseInt(token));
-      } else if (CalculatorUtilities.isOperator(token)) {
+      } else if (CalculatorUtilities.getTokenType(token) == TokenType.OPERATOR) {
         // if this is an operator, we apply it to the two last numbers on the stack
         applyOperatorToStack(token, stack);
       } else {

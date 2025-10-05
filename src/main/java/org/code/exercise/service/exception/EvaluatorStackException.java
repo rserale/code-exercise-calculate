@@ -1,4 +1,4 @@
-package org.code.exercise.exception;
+package org.code.exercise.service.exception;
 
 /**
  * Thrown when evaluating a postfix expression fails due to an invalid stack state.
