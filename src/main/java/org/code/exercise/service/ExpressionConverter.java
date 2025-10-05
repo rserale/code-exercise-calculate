@@ -51,7 +51,7 @@ public class ExpressionConverter {
     // we pop and append to output all the operators present in the stack until we reach the left
     // parenthesis in the stack
     while (!operatorStack.isEmpty()
-            && CalculatorUtilities.getTokenType(operatorStack.peekFirst()) == TokenType.LEFT_PAREN) {
+        && CalculatorUtilities.getTokenType(operatorStack.peekFirst()) == TokenType.LEFT_PAREN) {
       output.add(operatorStack.pop());
     }
     // if we reach the end of the stack, it means that a left parenthesis was missing in the

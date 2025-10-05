@@ -1,12 +1,13 @@
 package org.code.exercise.service;
 
-import org.code.exercise.service.helper.CalculatorUtilities;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.code.exercise.service.helper.CalculatorUtilities;
 
 public class Parser {
+
+  private static String DELIMITER_REGEXP = "\\s+";
 
   private Parser() {
     throw new UnsupportedOperationException("Utility class");
@@ -35,7 +36,7 @@ public class Parser {
 
     // we split the expression using characters matching the regexp '\s' as delimiters, which means
     // any blank character (space, tab, etc)
-    String[] parts = expressionWithSpacedParenthesis.trim().split("\\s+");
+    String[] parts = expressionWithSpacedParenthesis.trim().split(DELIMITER_REGEXP);
     return Arrays.asList(parts);
   }
 }

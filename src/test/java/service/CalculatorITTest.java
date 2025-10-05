@@ -2,8 +2,8 @@ package service;
 
 import static org.junit.Assert.*;
 
-import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 import org.code.exercise.service.Calculator;
+import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 import org.junit.Test;
 
 public class CalculatorITTest {

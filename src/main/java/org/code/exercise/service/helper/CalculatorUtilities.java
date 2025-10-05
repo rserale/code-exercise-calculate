@@ -1,28 +1,40 @@
 package org.code.exercise.service.helper;
 
-import org.code.exercise.service.helper.enums.TokenType;
-
 import java.util.Map;
 import java.util.function.IntBinaryOperator;
+import org.code.exercise.service.helper.enums.TokenType;
 
 public class CalculatorUtilities {
   public static final String LEFT_PARENTHESIS = "(";
   public static final String RIGHT_PARENTHESIS = ")";
 
+  private static final String OP_ADD = "+";
+  private static final String OP_SUB = "-";
+  private static final String OP_MUL = "*";
+  private static final String OP_DIV = "/";
+
+  private static final int PRIO_HIGH = 2;
+  private static final int PRIO_LOW = 1;
+
+  private static final String INT_REGEXP = "-?\\d+";
+
   private record Operator(int priority, IntBinaryOperator operation) {}
 
   private static final Map<String, Operator> OPERATORS_DEFINITION =
       Map.of(
-          "+", new Operator(1, (a, b) -> a + b),
-          "-", new Operator(1, (a, b) -> a - b),
-          "*", new Operator(2, (a, b) -> a * b),
-          "/",
-              new Operator(
-                  2,
-                  (a, b) -> {
-                    if (b == 0) throw new ArithmeticException("Division by zero");
-                    return a / b;
-                  }));
+          OP_ADD,
+          new Operator(PRIO_LOW, (a, b) -> a + b),
+          OP_SUB,
+          new Operator(PRIO_LOW, (a, b) -> a - b),
+          OP_MUL,
+          new Operator(PRIO_HIGH, (a, b) -> a * b),
+          OP_DIV,
+          new Operator(
+              PRIO_HIGH,
+              (a, b) -> {
+                if (b == 0) throw new ArithmeticException("Division by zero");
+                return a / b;
+              }));
 
   private CalculatorUtilities() {
     throw new UnsupportedOperationException("Utility class");
@@ -65,6 +77,6 @@ public class CalculatorUtilities {
   }
 
   public static boolean isInteger(String token) {
-    return token.matches("-?\\d+");
+    return token.matches(INT_REGEXP);
   }
 }

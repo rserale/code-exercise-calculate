@@ -44,7 +44,7 @@ public class Evaluator {
     // we need two numbers in the stack for solving the operation
     if (stack.size() < 2) {
       throw new EvaluatorStackException(
-              "Operation cannot be solved due to missing operands on the stack");
+          "Operation cannot be solved due to missing operands on the stack");
     }
     int b = stack.pop();
     int a = stack.pop();
@@ -52,7 +52,6 @@ public class Evaluator {
     int result = CalculatorUtilities.applyOperator(a, b, operator);
     stack.push(result);
   }
-
 
   private static void validateStackAfterEvaluation(Deque<Integer> stack) {
     // After processing all the tokens, there should be exactly one element left: the final result
