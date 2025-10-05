@@ -2,7 +2,7 @@ package org.code.exercise.service;
 
 import java.util.*;
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
-import org.code.exercise.service.helper.CalculatorUtilities;
+import org.code.exercise.service.helper.CalculatorUtils;
 import org.code.exercise.service.helper.enums.TokenType;
 
 public class ExpressionConverterService {
@@ -27,7 +27,7 @@ public class ExpressionConverterService {
     Deque<String> operatorStack = new ArrayDeque<>();
 
     for (String token : tokens) {
-      switch (CalculatorUtilities.getTokenType(token)) {
+      switch (CalculatorUtils.getTokenType(token)) {
         case NUMBER -> output.add(token); // we immediately add the number to the output
         case OPERATOR ->
             handleOperator(
@@ -51,7 +51,7 @@ public class ExpressionConverterService {
     // we pop and append to output all the operators present in the stack until we reach the left
     // parenthesis in the stack
     while (!operatorStack.isEmpty()
-        && CalculatorUtilities.getTokenType(operatorStack.peekFirst()) != TokenType.LEFT_PAREN) {
+        && CalculatorUtils.getTokenType(operatorStack.peekFirst()) != TokenType.LEFT_PAREN) {
       output.add(operatorStack.pop());
     }
     // if we reach the end of the stack, it means that a left parenthesis was missing in the
@@ -69,9 +69,9 @@ public class ExpressionConverterService {
     // we pop operators from the stack while they have higher or equal priority than our current one
     // those operators are appended to the output in the unstacking order
     while (!operatorStack.isEmpty()
-        && CalculatorUtilities.getTokenType(operatorStack.peekFirst()) == TokenType.OPERATOR
-        && CalculatorUtilities.getOperatorPriority(operator)
-            <= CalculatorUtilities.getOperatorPriority(operatorStack.peekFirst())) {
+        && CalculatorUtils.getTokenType(operatorStack.peekFirst()) == TokenType.OPERATOR
+        && CalculatorUtils.getOperatorPriority(operator)
+            <= CalculatorUtils.getOperatorPriority(operatorStack.peekFirst())) {
       output.add(operatorStack.pop());
     }
     // once the unstacking process is finished, we push our current operator on the stack
@@ -83,7 +83,7 @@ public class ExpressionConverterService {
       String operator = operatorStack.pop();
       // at this step, if we find a left parenthesis in the stack, it means that no right
       // parenthesis was present to close it
-      if (CalculatorUtilities.getTokenType(operator) == TokenType.LEFT_PAREN) {
+      if (CalculatorUtils.getTokenType(operator) == TokenType.LEFT_PAREN) {
         throw new ExpressionConverterInvalidTokenException(
             "Mismatched parentheses: right parenthesis missing");
       }

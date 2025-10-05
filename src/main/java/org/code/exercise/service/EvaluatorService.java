@@ -2,7 +2,7 @@ package org.code.exercise.service;
 
 import java.util.*;
 import org.code.exercise.service.exception.EvaluatorStackException;
-import org.code.exercise.service.helper.CalculatorUtilities;
+import org.code.exercise.service.helper.CalculatorUtils;
 import org.code.exercise.service.helper.enums.TokenType;
 
 public class EvaluatorService {
@@ -24,10 +24,10 @@ public class EvaluatorService {
     // now that the expression is converted to postfix notation, we can simply evaluate it from left
     // to right
     for (String token : tokens) {
-      if (CalculatorUtilities.getTokenType(token) == TokenType.NUMBER) {
+      if (CalculatorUtils.getTokenType(token) == TokenType.NUMBER) {
         // if the token is a number, we push it on the stack
         stack.push(Integer.parseInt(token));
-      } else if (CalculatorUtilities.getTokenType(token) == TokenType.OPERATOR) {
+      } else if (CalculatorUtils.getTokenType(token) == TokenType.OPERATOR) {
         // if this is an operator, we apply it to the two last numbers on the stack
         applyOperatorToStack(token, stack);
       } else {
@@ -49,7 +49,7 @@ public class EvaluatorService {
     int b = stack.pop();
     int a = stack.pop();
     // we apply the operator to the two numbers and push the result back on the stack
-    int result = CalculatorUtilities.applyOperator(a, b, operator);
+    int result = CalculatorUtils.applyOperator(a, b, operator);
     stack.push(result);
   }
 

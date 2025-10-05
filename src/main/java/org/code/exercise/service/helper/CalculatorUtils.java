@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.function.IntBinaryOperator;
 import org.code.exercise.service.helper.enums.TokenType;
 
-public class CalculatorUtilities {
+public class CalculatorUtils {
   public static final String LEFT_PARENTHESIS = "(";
   public static final String RIGHT_PARENTHESIS = ")";
 
@@ -36,7 +36,7 @@ public class CalculatorUtilities {
                 return a / b;
               }));
 
-  private CalculatorUtilities() {
+  private CalculatorUtils() {
     throw new UnsupportedOperationException("Utility class");
   }
 
