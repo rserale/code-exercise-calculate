@@ -53,7 +53,7 @@ public class ExpressionConverterService {
     LogUtils.log("[CLOSING PARENTHESIS]", LogUtils.HIGH_V);
     while (!operatorStack.isEmpty()
         && CalculatorUtils.getTokenType(operatorStack.peekFirst()) != TokenType.LEFT_PAREN) {
-      LogUtils.log("Appending operator : " + operatorStack.peekFirst(), LogUtils.HIGH_V);
+      LogUtils.log("Appending operator from stack : " + operatorStack.peekFirst(), LogUtils.HIGH_V);
       output.add(operatorStack.pop());
       logOperatorStackAndOutput(operatorStack, output);
     }
