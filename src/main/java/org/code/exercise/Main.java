@@ -4,6 +4,7 @@ import org.code.exercise.service.CalculatorService;
 import org.code.exercise.service.exception.EvaluatorStackException;
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 import org.code.exercise.service.helper.LogUtils;
+
 public class Main {
   private static final String ARG_VERBOSITY_1 = "-v";
   private static final String ARG_VERBOSITY_2 = "-vv";

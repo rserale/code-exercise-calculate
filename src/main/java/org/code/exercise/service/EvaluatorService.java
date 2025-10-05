@@ -25,8 +25,8 @@ public class EvaluatorService {
     LogUtils.log("\nExpression evaluation:", LogUtils.LOW_V);
     // We simply evaluate the postfix expression from left to right
     for (String token : tokens) {
-        LogUtils.log("Token: " + token + "   Stack: " + stack, LogUtils.HIGH_V);
-        if (CalculatorUtils.getTokenType(token) == TokenType.NUMBER) {
+      LogUtils.log("Token: " + token + "   Stack: " + stack, LogUtils.HIGH_V);
+      if (CalculatorUtils.getTokenType(token) == TokenType.NUMBER) {
         stack.push(Integer.parseInt(token));
       } else if (CalculatorUtils.getTokenType(token) == TokenType.OPERATOR) {
         applyOperatorToStack(token, stack);

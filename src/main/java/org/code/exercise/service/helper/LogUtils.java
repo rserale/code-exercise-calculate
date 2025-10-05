@@ -18,12 +18,13 @@ public final class LogUtils {
     LOGGER.setUseParentHandlers(false);
 
     ConsoleHandler handler = new ConsoleHandler();
-    handler.setFormatter(new SimpleFormatter() {
-      @Override
-      public String format(LogRecord record) {
-        return record.getMessage() + System.lineSeparator();
-      }
-    });
+    handler.setFormatter(
+        new SimpleFormatter() {
+          @Override
+          public String format(LogRecord record) {
+            return record.getMessage() + System.lineSeparator();
+          }
+        });
 
     LOGGER.addHandler(handler);
     LOGGER.setLevel(Level.ALL);

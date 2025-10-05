@@ -30,9 +30,9 @@ public class ExpressionConverterService {
         "\nInfix expression: " + tokens + "\nConverting infix expression to postfix:",
         LogUtils.LOW_V);
     for (String token : tokens) {
-        LogUtils.log(
-                "Token: " + token + "\nOperator stack: " + operatorStack + "\nOutput: " + output + "\n",
-                LogUtils.HIGH_V);
+      LogUtils.log(
+          "Token: " + token + "\nOperator stack: " + operatorStack + "\nOutput: " + output + "\n",
+          LogUtils.HIGH_V);
       switch (CalculatorUtils.getTokenType(token)) {
         case NUMBER -> output.add(token);
         case OPERATOR -> handleOperator(token, operatorStack, output);
@@ -51,11 +51,11 @@ public class ExpressionConverterService {
    * We pop and append to output all the operators present in the stack until we reach the left parenthesis in the stack, then we eliminate it.
    * */
   private static void handleClosingParenthesis(Deque<String> operatorStack, List<String> output) {
-      LogUtils.log("[CLOSING PARENTHESIS]", LogUtils.HIGH_V);
-      while (!operatorStack.isEmpty()
+    LogUtils.log("[CLOSING PARENTHESIS]", LogUtils.HIGH_V);
+    while (!operatorStack.isEmpty()
         && CalculatorUtils.getTokenType(operatorStack.peekFirst()) != TokenType.LEFT_PAREN) {
-          LogUtils.log("Appending operator : " + operatorStack.peekFirst(), LogUtils.HIGH_V);
-          output.add(operatorStack.pop());
+      LogUtils.log("Appending operator : " + operatorStack.peekFirst(), LogUtils.HIGH_V);
+      output.add(operatorStack.pop());
       LogUtils.log("Operator stack: " + operatorStack, LogUtils.HIGH_V);
       LogUtils.log("Output: " + output, LogUtils.HIGH_V);
     }
@@ -98,7 +98,7 @@ public class ExpressionConverterService {
             "Mismatched parentheses: right parenthesis missing");
       }
       output.add(operator);
-      LogUtils.log("Operator stack: " + operatorStack +"\nOutput: " + output, LogUtils.HIGH_V);
+      LogUtils.log("Operator stack: " + operatorStack + "\nOutput: " + output, LogUtils.HIGH_V);
     }
   }
 }
