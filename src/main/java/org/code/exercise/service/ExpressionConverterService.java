@@ -30,9 +30,8 @@ public class ExpressionConverterService {
         "\nInfix expression: " + tokens + "\nConverting infix expression to postfix:",
         LogUtils.LOW_V);
     for (String token : tokens) {
-      LogUtils.log(
-          "Token: " + token + "\nOperator stack: " + operatorStack + "\nOutput: " + output + "\n",
-          LogUtils.HIGH_V);
+      LogUtils.log("Token: " + token, LogUtils.HIGH_V);
+      logOperatorStackAndOutput(operatorStack, output);
       switch (CalculatorUtils.getTokenType(token)) {
         case NUMBER -> output.add(token);
         case OPERATOR -> handleOperator(token, operatorStack, output);
@@ -56,8 +55,7 @@ public class ExpressionConverterService {
         && CalculatorUtils.getTokenType(operatorStack.peekFirst()) != TokenType.LEFT_PAREN) {
       LogUtils.log("Appending operator : " + operatorStack.peekFirst(), LogUtils.HIGH_V);
       output.add(operatorStack.pop());
-      LogUtils.log("Operator stack: " + operatorStack, LogUtils.HIGH_V);
-      LogUtils.log("Output: " + output, LogUtils.HIGH_V);
+      logOperatorStackAndOutput(operatorStack, output);
     }
     // If we reach the end of the stack, it means that a left parenthesis was missing in the
     // original expression
@@ -98,7 +96,11 @@ public class ExpressionConverterService {
             "Mismatched parentheses: right parenthesis missing");
       }
       output.add(operator);
-      LogUtils.log("Operator stack: " + operatorStack + "\nOutput: " + output, LogUtils.HIGH_V);
+      logOperatorStackAndOutput(operatorStack, output);
     }
+  }
+
+  private static void logOperatorStackAndOutput(Deque<String> operatorStack, List<String> output) {
+    LogUtils.log("Operator stack: " + operatorStack + "\nOutput: " + output, LogUtils.HIGH_V);
   }
 }
