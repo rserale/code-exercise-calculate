@@ -1,5 +1,6 @@
 package org.code.exercise;
 
+import java.util.Map;
 import org.code.exercise.service.CalculatorService;
 import org.code.exercise.service.exception.EvaluatorStackException;
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
@@ -8,6 +9,13 @@ import org.code.exercise.service.helper.LogUtils;
 public class Main {
   private static final String ARG_VERBOSITY_1 = "-v";
   private static final String ARG_VERBOSITY_2 = "-vv";
+
+  private static final Map<Class<? extends Exception>, String> ERROR_PREFIXES =
+      Map.of(
+          ExpressionConverterInvalidTokenException.class, "Syntax error",
+          EvaluatorStackException.class, "Evaluation error",
+          IllegalArgumentException.class, "Invalid input",
+          ArithmeticException.class, "Arithmetic error");
 
   public static void main(String[] args) {
     ParsedArguments parsedArgs = parseArguments(args);
@@ -48,16 +56,9 @@ public class Main {
     try {
       int result = CalculatorService.calculate(expression);
       System.out.println("Result: " + result);
-    } catch (ExpressionConverterInvalidTokenException e) {
-      printErrorAndExit("Syntax error: " + e.getMessage());
-    } catch (EvaluatorStackException e) {
-      printErrorAndExit("Evaluation error: " + e.getMessage());
-    } catch (IllegalArgumentException e) {
-      printErrorAndExit("Invalid input: " + e.getMessage());
-    } catch (ArithmeticException e) {
-      printErrorAndExit("Arithmetic error: " + e.getMessage());
     } catch (Exception e) {
-      printErrorAndExit("Unexpected error: " + e.getMessage());
+      String prefix = ERROR_PREFIXES.getOrDefault(e.getClass(), "Unexpected error");
+      printErrorAndExit(prefix + ": " + e.getMessage());
     }
   }
 
