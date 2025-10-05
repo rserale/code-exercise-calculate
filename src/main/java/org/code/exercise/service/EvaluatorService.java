@@ -3,6 +3,7 @@ package org.code.exercise.service;
 import java.util.*;
 import org.code.exercise.service.exception.EvaluatorStackException;
 import org.code.exercise.service.helper.CalculatorUtilities;
+import org.code.exercise.service.helper.LogUtils;
 import org.code.exercise.service.helper.enums.TokenType;
 
 public class EvaluatorService {
@@ -23,7 +24,9 @@ public class EvaluatorService {
 
     // now that the expression is converted to postfix notation, we can simply evaluate it from left
     // to right
+    LogUtils.log("\nExpression evaluation:", LogUtils.LOW_V);
     for (String token : tokens) {
+      LogUtils.log("Token: " + token + "   Stack: " + stack, LogUtils.HIGH_V);
       if (CalculatorUtilities.getTokenType(token) == TokenType.NUMBER) {
         // if the token is a number, we push it on the stack
         stack.push(Integer.parseInt(token));
@@ -35,6 +38,7 @@ public class EvaluatorService {
         throw new EvaluatorStackException("Invalid token in postfix expression: " + token);
       }
     }
+
     // we validate the final stack state
     validateStackAfterEvaluation(stack);
     return stack.pop();
@@ -48,6 +52,7 @@ public class EvaluatorService {
     }
     int b = stack.pop();
     int a = stack.pop();
+
     // we apply the operator to the two numbers and push the result back on the stack
     int result = CalculatorUtilities.applyOperator(a, b, operator);
     stack.push(result);
@@ -55,6 +60,7 @@ public class EvaluatorService {
 
   private static void validateStackAfterEvaluation(Deque<Integer> stack) {
     // After processing all the tokens, there should be exactly one element left: the final result
+    LogUtils.log("Stack final state: " + stack + "\n", LogUtils.HIGH_V);
     if (stack.size() > 1) {
       throw new EvaluatorStackException("More than one element left on the stack");
     } else if (stack.size() == 0) {

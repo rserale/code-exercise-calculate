@@ -3,6 +3,7 @@ package org.code.exercise.service;
 import java.util.*;
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 import org.code.exercise.service.helper.CalculatorUtilities;
+import org.code.exercise.service.helper.LogUtils;
 import org.code.exercise.service.helper.enums.TokenType;
 
 public class ExpressionConverterService {
@@ -25,8 +26,13 @@ public class ExpressionConverterService {
   public static List<String> infixToPostfix(List<String> tokens) {
     List<String> output = new ArrayList<>();
     Deque<String> operatorStack = new ArrayDeque<>();
-
+    LogUtils.log(
+        "\nInfix expression: " + tokens + "\nConverting infix expression to postfix:",
+        LogUtils.LOW_V);
     for (String token : tokens) {
+      LogUtils.log(
+          "Token: " + token + "\nOperator stack: " + operatorStack + "\nOutput: " + output + "\n",
+          LogUtils.HIGH_V);
       switch (CalculatorUtilities.getTokenType(token)) {
         case NUMBER -> output.add(token); // we immediately add the number to the output
         case OPERATOR ->
@@ -44,15 +50,20 @@ public class ExpressionConverterService {
     }
     // finally, we pop any operators left in the stack and append them to the output
     flushOperatorStack(operatorStack, output);
+    LogUtils.log("Postfix expression: " + output, LogUtils.LOW_V);
     return output;
   }
 
   private static void handleClosingParenthesis(Deque<String> operatorStack, List<String> output) {
     // we pop and append to output all the operators present in the stack until we reach the left
     // parenthesis in the stack
+    LogUtils.log("[CLOSING PARENTHESIS]", LogUtils.HIGH_V);
     while (!operatorStack.isEmpty()
         && CalculatorUtilities.getTokenType(operatorStack.peekFirst()) != TokenType.LEFT_PAREN) {
+      LogUtils.log("Appending operator : " + operatorStack.peekFirst(), LogUtils.HIGH_V);
       output.add(operatorStack.pop());
+      LogUtils.log("Operator stack: " + operatorStack, LogUtils.HIGH_V);
+      LogUtils.log("Output: " + output, LogUtils.HIGH_V);
     }
     // if we reach the end of the stack, it means that a left parenthesis was missing in the
     // original expression
@@ -62,6 +73,7 @@ public class ExpressionConverterService {
     }
     // finally, we get rid of the left parenthesis once we reach it
     operatorStack.pop();
+    LogUtils.log("[PARENTHESIS CLOSED]\n", LogUtils.HIGH_V);
   }
 
   private static void handleOperator(
