@@ -58,12 +58,10 @@ public class CalculatorUtilities {
     return op;
   }
 
-  // TODO: test error in case of unknown operator
   public static int applyOperator(int a, int b, String operator) {
     return getOperatorOrThrow(operator).operation.applyAsInt(a, b);
   }
 
-  // TODO: test error in case of unknown operator
   public static int getOperatorPriority(String operator) {
     return getOperatorOrThrow(operator).priority;
   }
