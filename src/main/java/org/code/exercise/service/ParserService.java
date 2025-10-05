@@ -3,7 +3,7 @@ package org.code.exercise.service;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.code.exercise.service.helper.CalculatorUtilities;
+import org.code.exercise.service.helper.CalculatorUtils;
 
 public class ParserService {
 
@@ -24,18 +24,17 @@ public class ParserService {
       return Collections.emptyList();
     }
 
-    // we add spaces around parenthesis to make them separate tokens
+    // We add spaces around parentheses to make them separate tokens
     String expressionWithSpacedParenthesis =
         expression
             .replace(
-                CalculatorUtilities.LEFT_PARENTHESIS,
-                String.format(" %s ", CalculatorUtilities.LEFT_PARENTHESIS))
+                CalculatorUtils.LEFT_PARENTHESIS,
+                String.format(" %s ", CalculatorUtils.LEFT_PARENTHESIS))
             .replace(
-                CalculatorUtilities.RIGHT_PARENTHESIS,
-                String.format(" %s ", CalculatorUtilities.RIGHT_PARENTHESIS));
+                CalculatorUtils.RIGHT_PARENTHESIS,
+                String.format(" %s ", CalculatorUtils.RIGHT_PARENTHESIS));
 
-    // we split the expression using characters matching the regexp '\s' as delimiters, which means
-    // any blank character (space, tab, etc)
+    // We split the expression using as delimiters any characters matching a blank space
     String[] parts = expressionWithSpacedParenthesis.trim().split(DELIMITER_REGEXP);
     return Arrays.asList(parts);
   }
