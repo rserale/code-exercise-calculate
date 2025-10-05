@@ -86,7 +86,7 @@ This project includes a GitHub workflow that automatically runs tests on pull re
 
 This ensures that any changes submitted via PR are automatically validated before merging.
 
-The workflow configuration can be found [here](.github/workflows/run-tests.yml).
+The workflow configuration can be found [here](https://github.com/rserale/code-exercise-calculate/blob/main/.github/workflows/tests_validation.yml).
 
 ### Notes
 
