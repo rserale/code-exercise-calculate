@@ -1,4 +1,4 @@
-package org.code.exercise.exception;
+package org.code.exercise.service.exception;
 
 /**
  * Thrown when converting an infix expression to postfix fails.
@@ -10,11 +10,6 @@ package org.code.exercise.exception;
  * </ul>
  */
 public class ExpressionConverterInvalidTokenException extends IllegalArgumentException {
-
-  public ExpressionConverterInvalidTokenException() {
-    super();
-  }
-
   public ExpressionConverterInvalidTokenException(String message) {
     super(message);
   }
