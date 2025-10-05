@@ -52,12 +52,6 @@ public class CalculatorUtils {
     return OPERATORS_DEFINITION.containsKey(token);
   }
 
-  private static Operator getOperatorOrThrow(String operator) {
-    Operator op = OPERATORS_DEFINITION.get(operator);
-    if (op == null) throw new IllegalArgumentException("Unknown operator: " + operator);
-    return op;
-  }
-
   public static int applyOperator(int a, int b, String operator) {
     return getOperatorOrThrow(operator).operation.applyAsInt(a, b);
   }
@@ -66,15 +60,21 @@ public class CalculatorUtils {
     return getOperatorOrThrow(operator).priority;
   }
 
-  public static boolean isLeftParenthesis(String token) {
+  private static Operator getOperatorOrThrow(String operator) {
+    Operator op = OPERATORS_DEFINITION.get(operator);
+    if (op == null) throw new IllegalArgumentException("Unknown operator: " + operator);
+    return op;
+  }
+
+  private static boolean isLeftParenthesis(String token) {
     return LEFT_PARENTHESIS.equals(token);
   }
 
-  public static boolean isRightParenthesis(String token) {
+  private static boolean isRightParenthesis(String token) {
     return RIGHT_PARENTHESIS.equals(token);
   }
 
-  public static boolean isInteger(String token) {
+  private static boolean isInteger(String token) {
     return token.matches(INT_REGEXP);
   }
 }
