@@ -40,11 +40,6 @@ package:
 verify:
 	$(MAVEN_CMD) verify
 
-# Show dependency tree
-.PHONY: deps
-deps:
-	$(MAVEN_CMD) dependency:tree
-
 # Runs spotless plugin to check code format
 .PHONY: spotless-check
 spotless-check:
