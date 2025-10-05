@@ -26,12 +26,15 @@ public class ExpressionConverterService {
   public static List<String> infixToPostfix(List<String> tokens) {
     List<String> output = new ArrayList<>();
     Deque<String> operatorStack = new ArrayDeque<>();
+
     LogUtils.log(
         "\nInfix expression: " + tokens + "\nConverting infix expression to postfix:",
         LogUtils.LOW_V);
+
     for (String token : tokens) {
       LogUtils.log("Token: " + token, LogUtils.HIGH_V);
       logOperatorStackAndOutput(operatorStack, output);
+
       switch (CalculatorUtils.getTokenType(token)) {
         case NUMBER -> output.add(token);
         case OPERATOR -> handleOperator(token, operatorStack, output);
@@ -41,7 +44,9 @@ public class ExpressionConverterService {
             throw new ExpressionConverterInvalidTokenException("Invalid token: " + token);
       }
     }
+
     flushOperatorStack(operatorStack, output);
+
     LogUtils.log("\nPostfix expression: " + output, LogUtils.LOW_V);
     return output;
   }
@@ -51,10 +56,12 @@ public class ExpressionConverterService {
    * */
   private static void handleClosingParenthesis(Deque<String> operatorStack, List<String> output) {
     LogUtils.log("[CLOSING PARENTHESIS]", LogUtils.HIGH_V);
+
     while (!operatorStack.isEmpty()
         && CalculatorUtils.getTokenType(operatorStack.peekFirst()) != TokenType.LEFT_PAREN) {
       LogUtils.log("Appending operator from stack : " + operatorStack.peekFirst(), LogUtils.HIGH_V);
       output.add(operatorStack.pop());
+
       logOperatorStackAndOutput(operatorStack, output);
     }
     // If we reach the end of the stack, it means that a left parenthesis was missing in the
@@ -64,6 +71,7 @@ public class ExpressionConverterService {
           "Mismatched parentheses: left parenthesis missing");
     }
     operatorStack.pop();
+
     LogUtils.log("[PARENTHESIS CLOSED]\n", LogUtils.HIGH_V);
   }
 
@@ -87,6 +95,7 @@ public class ExpressionConverterService {
    * */
   private static void flushOperatorStack(Deque<String> operatorStack, List<String> output) {
     LogUtils.log("Flushing operator stack: " + operatorStack, LogUtils.HIGH_V);
+
     while (!operatorStack.isEmpty()) {
       String operator = operatorStack.pop();
       // At this step, if we find a left parenthesis in the stack, it means that no right
@@ -96,6 +105,7 @@ public class ExpressionConverterService {
             "Mismatched parentheses: right parenthesis missing");
       }
       output.add(operator);
+
       logOperatorStackAndOutput(operatorStack, output);
     }
   }

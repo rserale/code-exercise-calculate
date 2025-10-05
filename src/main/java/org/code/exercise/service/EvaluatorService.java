@@ -23,9 +23,11 @@ public class EvaluatorService {
     Deque<Integer> stack = new ArrayDeque<>();
 
     LogUtils.log("\nExpression evaluation:", LogUtils.LOW_V);
+
     // We simply evaluate the postfix expression from left to right
     for (String token : tokens) {
       LogUtils.log("Token: " + token + "   Stack: " + stack, LogUtils.HIGH_V);
+
       if (CalculatorUtils.getTokenType(token) == TokenType.NUMBER) {
         stack.push(Integer.parseInt(token));
       } else if (CalculatorUtils.getTokenType(token) == TokenType.OPERATOR) {
@@ -58,6 +60,7 @@ public class EvaluatorService {
    * */
   private static void validateStackAfterEvaluation(Deque<Integer> stack) {
     LogUtils.log("Stack final state: " + stack + "\n", LogUtils.HIGH_V);
+
     if (stack.size() > 1) {
       throw new EvaluatorStackException("More than one element left on the stack");
     } else if (stack.size() == 0) {
