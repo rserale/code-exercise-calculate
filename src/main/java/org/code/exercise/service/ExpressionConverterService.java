@@ -51,7 +51,7 @@ public class ExpressionConverterService {
     // we pop and append to output all the operators present in the stack until we reach the left
     // parenthesis in the stack
     while (!operatorStack.isEmpty()
-        && CalculatorUtilities.getTokenType(operatorStack.peekFirst()) == TokenType.LEFT_PAREN) {
+        && CalculatorUtilities.getTokenType(operatorStack.peekFirst()) != TokenType.LEFT_PAREN) {
       output.add(operatorStack.pop());
     }
     // if we reach the end of the stack, it means that a left parenthesis was missing in the
@@ -69,7 +69,7 @@ public class ExpressionConverterService {
     // we pop operators from the stack while they have higher or equal priority than our current one
     // those operators are appended to the output in the unstacking order
     while (!operatorStack.isEmpty()
-        && CalculatorUtilities.getTokenType(operator) == TokenType.OPERATOR
+        && CalculatorUtilities.getTokenType(operatorStack.peekFirst()) == TokenType.OPERATOR
         && CalculatorUtilities.getOperatorPriority(operator)
             <= CalculatorUtilities.getOperatorPriority(operatorStack.peekFirst())) {
       output.add(operatorStack.pop());

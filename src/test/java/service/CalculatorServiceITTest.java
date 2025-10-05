@@ -57,7 +57,7 @@ public class CalculatorServiceITTest {
   @Test
   public void testEmptyExpression() {
     IllegalArgumentException ex =
-            assertThrows(IllegalArgumentException.class, () -> CalculatorService.calculate(""));
+        assertThrows(IllegalArgumentException.class, () -> CalculatorService.calculate(""));
     assertEquals("Expression must not be null or empty", ex.getMessage());
   }
 
