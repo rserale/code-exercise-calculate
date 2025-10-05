@@ -24,7 +24,7 @@ public class ParserService {
       return Collections.emptyList();
     }
 
-    // we add spaces around parenthesis to make them separate tokens
+    // We add spaces around parentheses to make them separate tokens
     String expressionWithSpacedParenthesis =
         expression
             .replace(
@@ -34,8 +34,7 @@ public class ParserService {
                 CalculatorUtils.RIGHT_PARENTHESIS,
                 String.format(" %s ", CalculatorUtils.RIGHT_PARENTHESIS));
 
-    // we split the expression using characters matching the regexp '\s' as delimiters, which means
-    // any blank character (space, tab, etc)
+    // We split the expression using as delimiters any characters matching a blank space
     String[] parts = expressionWithSpacedParenthesis.trim().split(DELIMITER_REGEXP);
     return Arrays.asList(parts);
   }
