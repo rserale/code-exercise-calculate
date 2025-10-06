@@ -6,6 +6,12 @@ import org.code.exercise.service.exception.EvaluatorStackException;
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 import org.code.exercise.service.helper.LogUtils;
 
+/**
+ * Entry point of the calculator application.
+ *
+ * <p>Parses the command-line argument, calls CalculatorService to convert and evaluate the
+ * expression, and handles exception thrown with user-friendly messages.
+ */
 public class Main {
   private static final String ARG_VERBOSITY_1 = "-v";
   private static final String ARG_VERBOSITY_2 = "-vv";
