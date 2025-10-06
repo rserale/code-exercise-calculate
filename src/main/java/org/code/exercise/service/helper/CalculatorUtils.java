@@ -19,7 +19,7 @@ public class CalculatorUtils {
   private static final int PRIORITY_HIGH = 2;
   private static final int PRIORITY_LOW = 1;
 
-  // Regex to match signed integers
+  // Regexp to match signed integers
   private static final String INT_REGEXP = "-?\\d+";
 
   // Definition of an operator: a priority and the operation itself implemented from a functional
