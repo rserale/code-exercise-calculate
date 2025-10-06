@@ -1,10 +1,10 @@
-package service.helper;
+package org.code.exercise.service;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
 import java.util.List;
-import org.code.exercise.service.ParserService;
+
 import org.junit.Test;
 
 public class ParserServiceTest {

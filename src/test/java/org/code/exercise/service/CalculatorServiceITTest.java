@@ -1,4 +1,4 @@
-package service;
+package org.code.exercise.service;
 
 import static org.junit.Assert.*;
 

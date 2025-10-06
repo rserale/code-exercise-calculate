@@ -5,32 +5,39 @@ import java.util.function.IntBinaryOperator;
 import org.code.exercise.service.helper.enums.TokenType;
 
 public class CalculatorUtils {
+  // Parentheses symbols
   public static final String LEFT_PARENTHESIS = "(";
   public static final String RIGHT_PARENTHESIS = ")";
 
+  // Operator symbols
   private static final String OP_ADD = "+";
   private static final String OP_SUB = "-";
   private static final String OP_MUL = "*";
   private static final String OP_DIV = "/";
 
-  private static final int PRIO_HIGH = 2;
-  private static final int PRIO_LOW = 1;
+  // Operator priority levels
+  private static final int PRIORITY_HIGH = 2;
+  private static final int PRIORITY_LOW = 1;
 
+  // Regex to match signed integers
   private static final String INT_REGEXP = "-?\\d+";
 
+  // Definition of an operator: a priority and the operation itself implemented from a functional
+  // interface
   private record Operator(int priority, IntBinaryOperator operation) {}
 
+  // Map of operator symbols to their definitions
   private static final Map<String, Operator> OPERATORS_DEFINITION =
       Map.of(
           OP_ADD,
-          new Operator(PRIO_LOW, (a, b) -> a + b),
+          new Operator(PRIORITY_LOW, (a, b) -> a + b),
           OP_SUB,
-          new Operator(PRIO_LOW, (a, b) -> a - b),
+          new Operator(PRIORITY_LOW, (a, b) -> a - b),
           OP_MUL,
-          new Operator(PRIO_HIGH, (a, b) -> a * b),
+          new Operator(PRIORITY_HIGH, (a, b) -> a * b),
           OP_DIV,
           new Operator(
-              PRIO_HIGH,
+              PRIORITY_HIGH,
               (a, b) -> {
                 if (b == 0) throw new ArithmeticException("Division by zero");
                 return a / b;
