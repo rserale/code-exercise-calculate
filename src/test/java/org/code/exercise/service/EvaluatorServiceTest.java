@@ -1,10 +1,10 @@
-package service.helper;
+package org.code.exercise.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import java.util.List;
-import org.code.exercise.service.EvaluatorService;
+
 import org.code.exercise.service.exception.EvaluatorStackException;
 import org.junit.Test;
 
