@@ -7,8 +7,10 @@ A Java command-line calculator that evaluates base arithmetic expressions for in
 It uses the [`Shunting-yard algorithm`](https://en.wikipedia.org/wiki/Shunting_yard_algorithm) to convert an infix expression into postfix notation (also called [`Reverse Polish Notation`](https://en.wikipedia.org/wiki/Reverse_Polish_notation)) in order to handle the priorities of the operators in an easy way during the evaluation.
 
 **Step 1.** The input expression is parsed into a list of tokens representing numbers and operators.
+
 **Step 2.** The tokens are converted from infix to postfix notation using the Shunting-yard algorithm.
    This ensures that operator priorities and parentheses are correctly handled.
+
 **Step 3.** The postfix expression is then evaluated from left to right, and finally returns the result as an integer.
    At this stage, we need no priority checks anymore because they have already been applied during the conversion.
 
