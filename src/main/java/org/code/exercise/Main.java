@@ -5,6 +5,12 @@ import org.code.exercise.service.CalculatorService;
 import org.code.exercise.service.exception.EvaluatorStackException;
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 
+/**
+ * Entry point of the calculator application.
+ *
+ * <p>Parses the command-line argument, calls CalculatorService to convert and evaluate the
+ * expression, and handles exception thrown with user-friendly messages.
+ */
 public class Main {
 
   private static final Map<Class<? extends Exception>, String> ERROR_PREFIXES =

@@ -3,7 +3,6 @@ package org.code.exercise.service;
 import static org.junit.Assert.*;
 
 import java.util.List;
-
 import org.code.exercise.service.exception.ExpressionConverterInvalidTokenException;
 import org.junit.Test;
 
