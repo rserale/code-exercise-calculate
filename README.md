@@ -15,6 +15,8 @@ It uses the [`Shunting-yard algorithm`](https://en.wikipedia.org/wiki/Shunting_y
   - `-v`: shows the result of the postfix conversion of the base expression.
   - `-vv`: shows all the steps of the postfix conversion and the final evaluation, including the state of the stack and the output.
 
+*(This feature was implemented on a separate branch in order to keep the main codebase simple and focused on the core logic.)*
+
 ## Requirements
 
 - Java 21 or higher.
